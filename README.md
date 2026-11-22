@@ -300,6 +300,14 @@ node tools/e2e-live.js           # 실서버 왕복 E2E 38건 (기본 http://127
 node tools/e2e-live.js http://127.0.0.1:8768    # 다른 주소를 볼 때
 ```
 
+`config.js` 의 서버 주소 규칙(후보 탐색 · `?server=` · 허용 목록)을 고쳤다면 둘을 더 돌립니다.
+백엔드 없이 Node 만으로 돌고, 역시 **종료 코드 = 실패 수**입니다.
+
+```bash
+node tools/test-server-discovery.js   # 후보 탐색 34건 — 순서 · meta 모양 판정 · 전부 실패/보관판 · 고정 · 공개 배포본 · 제한 시간
+node tools/test-server-allowlist.js   # 허용 목록 36건 — 허용 밖 ?server= 거부 · 토큰은 허용 출처에만
+```
+
 - `e2e-live.js` 의 인자는 **백엔드 주소**입니다. 프론트 개발 서버(:5500)를 넣으면 안 됩니다.
   Node 18+ 가 필요합니다(내장 `fetch` 사용).
 - `check-css.js` 가 필요한 이유 — CSS 는 파서가 이해 못 하는 것을 조용히 버립니다.
